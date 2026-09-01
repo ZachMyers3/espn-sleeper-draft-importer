@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "espn-sleeper-draft-importer"
+version = "0.1.0"
+description = "Import a Sleeper NFL fantasy football draft into an ESPN fantasy football league."
+authors = ["SuspensionPoint <jeremy@jeremy-bailey.com>"]
+readme = "README.md"
+license = "MIT"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.10"
+espn-api = "^0.46.0"
+sleeper = ">=1.7.3,<2.0.0"
+requests = "^2.32.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

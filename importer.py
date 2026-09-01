@@ -3,7 +3,6 @@ import time
 from urllib.parse import urlparse, urlunparse
 import requests
 from espn_api.football import League
-from espn_api.requests.espn_requests import checkRequestStatus
 from sleeper.api import DraftAPIClient
 from sleeper.enum import Sport, DraftType
 from sleeper.model import Draft, PlayerDraftPick
@@ -40,7 +39,7 @@ def league_post(league: League, payload: dict = None, headers: dict = None, exte
     endpoint = league.espn_request.LEAGUE_ENDPOINT + extend
     write_endpoint = modify_endpoint_to_writes(endpoint)
     r = requests.post(write_endpoint, json=payload, headers=headers, cookies=league.espn_request.cookies)
-    checkRequestStatus(r.status_code)
+    league.espn_request.checkRequestStatus(r.status_code)
     if league.espn_request.logger:
         league.espn_request.logger.log_request(endpoint=endpoint, params=payload, headers=headers, response=r.json())
     return r.json() if league.espn_request.year > 2017 else r.json()[0]
